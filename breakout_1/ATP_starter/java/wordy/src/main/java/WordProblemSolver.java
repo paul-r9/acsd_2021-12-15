@@ -18,15 +18,24 @@ class WordProblemSolver {
             String token = tokenizer.nextToken();
             try {
                 int num = Integer.parseInt(token);
+                result += num;
             }
-            catch {}
+            catch(Exception e) {
+
+            }
 
         }
-        return 5;
+        return result;
     }
 
     boolean isNumber(String token) {
         return false;
     }
 
+    String foo() {
+        switch(token) {
+            case "minus":
+                return token;
+        }
+    }
 }

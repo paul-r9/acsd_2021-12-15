@@ -3,6 +3,7 @@ package com.gildedrose;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class GildedRoseTest {
 
@@ -39,8 +40,12 @@ public class GildedRoseTest {
 
 		// Act
 		sut.updateQuality();
+		assertEquals(0, sut.items[0].sellIn);
+
+		sut.updateQuality();
 
 		// Assert
 		assertEquals(0, sut.items[0].quality);
+		assertEquals(-1, sut.items[0].sellIn);
 	}
 }

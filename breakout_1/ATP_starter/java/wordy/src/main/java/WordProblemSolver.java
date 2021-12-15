@@ -32,10 +32,10 @@ class WordProblemSolver {
         return false;
     }
 
-    String foo() {
+    String foo(String token) {
         switch(token) {
-            case "minus":
-                return token;
+            case "Minus":
+                return "-" ;
         }
     }
 }

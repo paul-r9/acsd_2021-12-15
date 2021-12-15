@@ -12,14 +12,20 @@ class WordProblemSolver {
     public int solve(String sentence){
         List<String> tokens = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(sentence.replace("?", "")," ");
+
+        int result = 0;
         while(tokenizer.hasMoreElements()) {
             String token = tokenizer.nextToken();
+            try {
+                int num = Integer.parseInt(token);
+            }
+            catch {}
 
         }
         return 5;
     }
 
-    boolean isNumber() {
+    boolean isNumber(String token) {
         return false;
     }
 

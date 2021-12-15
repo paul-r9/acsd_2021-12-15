@@ -14,7 +14,6 @@ public class WordProblemSolverTest {
         assertEquals(5, solver.solve("What is 5?"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testSingleAddition1() {
         assertEquals(2, solver.solve("What is 1 plus 1?"));

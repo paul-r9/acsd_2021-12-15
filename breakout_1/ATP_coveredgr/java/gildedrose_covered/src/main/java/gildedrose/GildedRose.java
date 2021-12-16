@@ -1,25 +1,30 @@
 package gildedrose;
 
 class GildedRose {
+    public static final int MAX_QUALITY = 50;
     Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;
     }
 
+
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            boolean isAgedOrBackStage = items[i].name.equals("Aged Brie")
-                    || items[i].name.equals("Backstage passes to a TAFKAL80ETC concert");
+            boolean isBackStage = items[i].name.equals("Backstage passes to a TAFKAL80ETC concert");
+            boolean isAgedBrie = items[i].name.equals("Aged Brie");
+            boolean isAgedOrBackStage = isBackStage || isAgedBrie;
+
             boolean notSulfurusAndQualityGreaterThan0 = items[i].quality > 0 && !items[i].name.equals("Sulfuras, Hand of Ragnaros");
             if (!isAgedOrBackStage && notSulfurusAndQualityGreaterThan0) {
                 items[i].quality = items[i].quality - 1;
             }
             if(isAgedOrBackStage) {
-                if (items[i].quality < 50) {
+                boolean hasNotReachedMaxQuality = (items[i].quality < MAX_QUALITY);
+                if (hasNotReachedMaxQuality) {
                     items[i].quality = items[i].quality + 1;
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (isBackStage) {
                         if (items[i].sellIn < 11) {
                             if (items[i].quality < 50) {
                                 items[i].quality = items[i].quality + 1;

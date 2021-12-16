@@ -32,5 +32,5 @@ Just for clarification, an item can never have its Quality increase above 50, ho
 legendary item and as such its Quality is 80 and it never alters.
 
 ---
-
+Bhavesh
     Your task is document the **existing** behavior by writing characterization tests. Do not change any of the code!

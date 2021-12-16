@@ -23,15 +23,18 @@ public class LaunchOrderListingTest {
         // Step 1. Create LaunchInfoProviderStub (that implements ISpacelineLaunchInfoProvider)
         LaunchedFlightsTest.MockLaunchInfoProvider provider = new LaunchedFlightsTest.MockLaunchInfoProvider();
 
+        provider.getCurrentLaunches().add(createLaunchInfo("test2"));
+        provider.getCurrentLaunches().add(createLaunchInfo("test1"));
         // Step 2 & 3 & 4. Create SUT - SpaceportDepartureBoard, using Constructor Injection
         SpaceportDepartureBoard board = new SpaceportDepartureBoard(provider);
         // Exercising this behavior happens during construction of the System Under Test
 
-        //provider.getCurrentLaunches().add();
 
 
         // Step 5. Verify the results are sorted correctly
         //Assertions.fail("TODO - test the info sorting behavior");
+        assertEquals("Test1", board.getLaunchList().get(0).getDestination());
         assertEquals(-1, board.getLaunchList().get(0).getDestination().compareTo(board.getLaunchList().get(1).getDestination()));
+        assertEquals(2, board.getLaunchList().get(1).getDestination().compareTo(board.getLaunchList().get(1).getDestination()));
     }
 }

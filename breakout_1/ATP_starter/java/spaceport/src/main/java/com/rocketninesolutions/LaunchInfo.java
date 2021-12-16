@@ -14,7 +14,7 @@ public class LaunchInfo implements Comparable<LaunchInfo> {
 
     @Override
     public int compareTo(LaunchInfo o) {
-        return 0;
+      return this.destination.compareTo(o.destination);
     }
 
     public enum LaunchStatus {

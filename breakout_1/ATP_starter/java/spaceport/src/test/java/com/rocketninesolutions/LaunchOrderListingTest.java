@@ -33,8 +33,7 @@ public class LaunchOrderListingTest {
 
         // Step 5. Verify the results are sorted correctly
         //Assertions.fail("TODO - test the info sorting behavior");
-        assertEquals("Test1", board.getLaunchList().get(0).getDestination());
-        assertEquals(-1, board.getLaunchList().get(0).getDestination().compareTo(board.getLaunchList().get(1).getDestination()));
-        assertEquals(2, board.getLaunchList().get(1).getDestination().compareTo(board.getLaunchList().get(1).getDestination()));
+        assertEquals("test1", board.getLaunchList().get(0).getDestination());
+				assertEquals("test2", board.getLaunchList().get(1).getDestination());
     }
 }

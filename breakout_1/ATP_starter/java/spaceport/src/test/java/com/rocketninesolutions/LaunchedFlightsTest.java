@@ -81,7 +81,7 @@ public class LaunchedFlightsTest {
         return li;
     }
 
-    class MockLaunchInfoProvider implements ISpacelineLaunchInfoProvider {
+    static class MockLaunchInfoProvider implements ISpacelineLaunchInfoProvider {
 
         List<LaunchInfo> launchList;
 

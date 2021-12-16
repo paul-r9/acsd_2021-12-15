@@ -1,6 +1,7 @@
 package com.rocketninesolutions;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class LaunchInfo implements Comparable<LaunchInfo> {
@@ -14,7 +15,11 @@ public class LaunchInfo implements Comparable<LaunchInfo> {
 
     @Override
     public int compareTo(LaunchInfo o) {
-      return this.destination.compareTo(o.destination);
+      int result = this.destination.compareTo(o.destination);
+      if (result == 0) {
+          result = this.time.toString().compareTo(o.time.toString());
+      }
+      return result;
     }
 
     public enum LaunchStatus {

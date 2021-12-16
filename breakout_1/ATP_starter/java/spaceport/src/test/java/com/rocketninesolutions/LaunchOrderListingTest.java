@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class LaunchOrderListingTest {
 
@@ -48,12 +49,44 @@ public class LaunchOrderListingTest {
         SpaceportDepartureBoard board = new SpaceportDepartureBoard(provider);
         // Exercising this behavior happens during construction of the System Under Test
 
-
-
         // Step 5. Verify the results are sorted correctly
         //Assertions.fail("TODO - test the info sorting behavior");
         assertEquals("test1", board.getLaunchList().get(0).getDestination());
         assertEquals("test1", board.getLaunchList().get(1).getDestination());
+
+        assertEquals("2021-10-10T10:10", board.getLaunchList().get(0).getTime().toString());
+        assertEquals("2021-11-10T10:10", board.getLaunchList().get(1).getTime().toString());
+    }
+
+    @Test
+    public void LaunchesAre_DifferentDestinationsAndTimes_TimesAreOrdered() {
+        // Step 1. Create LaunchInfoProviderStub (that implements ISpacelineLaunchInfoProvider)
+        LaunchedFlightsTest.MockLaunchInfoProvider provider = new LaunchedFlightsTest.MockLaunchInfoProvider();
+
+        provider.getCurrentLaunches().add(createLaunchInfo("test1", LocalDateTime.of(2021, 11, 10, 10, 10)));
+        provider.getCurrentLaunches().add(createLaunchInfo("test1", LocalDateTime.of(2021, 10, 10, 10, 10)));
+        provider.getCurrentLaunches().add(createLaunchInfo("test2", LocalDateTime.of(2021, 11, 10, 10, 10)));
+        provider.getCurrentLaunches().add(createLaunchInfo("test2", LocalDateTime.of(2021, 10, 10, 10, 10)));
+        provider.getCurrentLaunches().add(createLaunchInfo("test3", LocalDateTime.of(2021, 11, 10, 10, 10)));
+        provider.getCurrentLaunches().add(createLaunchInfo("test3", LocalDateTime.of(2021, 10, 10, 10, 10)));
+        // Step 2 & 3 & 4. Create SUT - SpaceportDepartureBoard, using Constructor Injection
+        SpaceportDepartureBoard board = new SpaceportDepartureBoard(provider);
+        // Exercising this behavior happens during construction of the System Under Test
+
+        // Step 5. Verify the results are sorted correctly
+        //Assertions.fail("TODO - test the info sorting behavior");
+        assertEquals("test1", board.getLaunchList().get(0).getDestination());
+        assertEquals("2021-10-10T10:10", board.getLaunchList().get(0).getTime().toString());
+
+        assertEquals("test1", board.getLaunchList().get(1).getDestination());
+        assertNotEquals("2021-11-10T10:10", board.getLaunchList().get(0).getTime().toString());
+
+        assertEquals("test1", board.getLaunchList().get(1).getDestination());
+        assertEquals("2021-10-10T10:10", board.getLaunchList().get(0).getTime().toString());
+
+//        assertEquals("test1", board.getLaunchList().get(1).getDestination());
+//        assertEquals("test1", board.getLaunchList().get(0).getDestination());
+//        assertEquals("test1", board.getLaunchList().get(1).getDestination());
 
         assertEquals("2021-10-10T10:10", board.getLaunchList().get(0).getTime().toString());
         assertEquals("2021-11-10T10:10", board.getLaunchList().get(1).getTime().toString());

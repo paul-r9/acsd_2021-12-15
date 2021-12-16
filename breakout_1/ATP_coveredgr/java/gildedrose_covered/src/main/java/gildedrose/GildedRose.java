@@ -15,8 +15,9 @@ class GildedRose {
             boolean isBackStage = item.name.equals("Backstage passes to a TAFKAL80ETC concert");
             boolean isAgedBrie = item.name.equals("Aged Brie");
             boolean isAgedOrBackStage = isBackStage || isAgedBrie;
+						boolean isSulfuras = item.name.equals("Sulfuras, Hand of Ragnaros");
 
-            boolean notSulfurusAndQualityGreaterThan0 = item.quality > 0 && !item.name.equals("Sulfuras, Hand of Ragnaros");
+            boolean notSulfurusAndQualityGreaterThan0 = item.quality > 0 && !isSulfuras;
             if (!isAgedOrBackStage && notSulfurusAndQualityGreaterThan0) {
                 item.quality = item.quality - 1;
             }
@@ -37,24 +38,20 @@ class GildedRose {
                 }
             }
 
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!isSulfuras) {
                 item.sellIn = item.sellIn - 1;
             }
 
             if (item.sellIn < 0) {
-                if (!item.name.equals("Aged Brie")) {
-                    if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.quality > 0) {
-                            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
-                } else {
+                if (!isAgedBrie && !isBackStage) {
+										if (item.quality > 0 && !isSulfuras) {
+												item.quality = item.quality - 1;
+										}
+								} else if (!isAgedBrie && isBackStage){
+										item.quality = item.quality - item.quality;
+								} else if (isAgedBrie) {
                     if (item.quality < 50) {
-                        item.quality = item.quality + 1;
+											increaseQuality(item);
                     }
                 }
             }
